@@ -40,8 +40,8 @@ const MyCard = (props) => {
                     </div>
                 </Skeleton>
             </Card>
-            <Modal mask={true} bodyStyle={{height:'100%', width:'100%', display:"flex"}} title={props.title} open={isModalOpen} onCancel={handleCancel} footer={null} centered={true}>
-                <iframe width={'900'} height={'400'} src={props.url} title={props.description} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <Modal mask={true} bodyStyle={{height:'100%', width:'100%', display: "inline-block"}} title={props.title} open={isModalOpen} onCancel={handleCancel} footer={null} centered={true}>
+                <iframe width={'450'} height={'800'} src={props.url} title={props.description} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </Modal>
         </>
     );

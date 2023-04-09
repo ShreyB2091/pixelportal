@@ -10,7 +10,7 @@ const Header = (props) => {
         params: {platform: 'all'},
         headers: {
           platform: 'all',
-          'X-RapidAPI-Key': '99cecdacffmsha1383b033df3bafp19489ejsndfbb9a1c5c93',
+          'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
           'X-RapidAPI-Host': 'mmo-games.p.rapidapi.com'
         }
     };
