@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Input } from 'antd';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
@@ -16,7 +17,7 @@ const Header = (props) => {
     };
 
     const [ platforms, setPlatforms ] = useState(['all']);
-    const [value, setValue] = useState(platforms[0]);
+    const [value, setValue] = useState('all');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -25,6 +26,11 @@ const Header = (props) => {
         else props.onPlatformChange(newValue);
         console.log(newValue);
     };
+
+    const handleSearch = (event) => {
+        props.onSearchStr(event.target.value);
+        console.log(event.target.value);
+    }
 
     useEffect(() => {
         fetch('https://mmo-games.p.rapidapi.com/games?sort-by=alphabetical', options)
@@ -35,13 +41,13 @@ const Header = (props) => {
                 if(!pltfrms.includes(game.platform)) pltfrms = [...pltfrms, game.platform];
             }
             console.log(pltfrms);
-            setPlatforms([...platforms, ...pltfrms]);
+            setPlatforms(['all', ...pltfrms]);
         }).catch(err => console.error(err));
     }, []);
 
     return (
         <div className="row my-3 d-flex justify-content-center align-items-center">
-            <div className="col-10" sx={{ bgcolor: 'background.paper' }}>
+            <div className="col-7 text-center" sx={{ bgcolor: 'background.paper' }}>
                 <Tabs value={value} onChange={handleChange} variant="scrollable" aria-label="full width scrollable prevent tabs example" style={{ width: '100%' }} textColor='smokewhite'>
                     {
                         platforms?.map((item) => {
@@ -49,6 +55,9 @@ const Header = (props) => {
                         })
                     }
                 </Tabs>
+            </div>
+            <div className="col-4 mx-2">
+                <Input placeholder="Enter Name to Filter" allowClear size="medium" onChange={handleSearch} />
             </div>
         </div>
     );

@@ -7,19 +7,24 @@ import { useState } from 'react';
 
 const App = () => {
 
-    const[platform,setPlatform] = useState('a');
+    const [platform,setPlatform] = useState('all');
+    const [substr, setSubstr] = useState('');
 
     const handlePlatform = (plt) => {
         setPlatform(plt);
     }
 
+    const handleSearch = (str) => {
+        setSubstr(str);
+    }
+
     return (
         <div className="App">
             <MyNavbar/>
-            <Header onPlatformChange={handlePlatform}/>
+            <Header onPlatformChange={handlePlatform} onSearchStr={handleSearch}/>
             <BrowserRouter>
 				<Routes>
-                    <Route path="/" element={<MainPage platform={platform}/>}/>
+                    <Route path="/" element={<MainPage platform={platform} search={substr}/>}/>
 				</Routes>
             </BrowserRouter>
         </div>

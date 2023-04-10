@@ -31,26 +31,26 @@ const MainPage = (props) => {
                     id: game.id
                 }]);
             }
-            setCards(newCard);
+            setCards(newCard.filter((item) => {
+                return item.title.toLowerCase().includes(props.search.toLowerCase());
+            }));
             console.log(response);
         }).catch(err => console.error(err));
         setLoading(false);
     },[props]);
 
     return (
-        // <div className="container">
-            <div className="row mx-2">
-                {
-                    cards?.map((element) => {
-                        return(
-                            <div className="col-4 my-3 d-flex justify-content-center align-items-center" key={element.id}>
-                                <MyCard title={element.title} genre={element.genre} loading={loading} url={element.url} id={element.id} platform={element.platform} thumbnail={element.thumbnail} releaseDate={element.releaseDate}/>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-        // </div>
+        <div className="row mx-2">
+            {
+                cards?.map((element) => {
+                    return(
+                        <div className="col-4 my-3 d-flex justify-content-center align-items-center" key={element.id}>
+                            <MyCard title={element.title} genre={element.genre} loading={loading} url={element.url} id={element.id} platform={element.platform} thumbnail={element.thumbnail} releaseDate={element.releaseDate}/>
+                        </div>
+                    )
+                })
+            }
+        </div>
     )
 }
 

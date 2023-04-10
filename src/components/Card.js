@@ -1,24 +1,17 @@
-import { useState } from 'react';
-import { Card, Skeleton, Modal } from 'antd';
+import { Card, Skeleton } from 'antd';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 const { Meta } = Card;
 
 const MyCard = (props) => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
     const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
+        window.open(props.url, '_blank');
     };
     
     return (
         <>
-            <Card style={{ width: '95%', marginTop: 16 }} actions={[<button className="btn btn-light" onClick={showModal}><SportsEsportsIcon key="play" fontSize="large"/> Play Game</button>]} cover={<img alt="example" src={props.thumbnail} style={{ objectFit: 'cover', height: '300px' }}/>}>
+            <Card style={{ width: '95%', marginTop: 16 }} actions={[<button className="btn btn-light" onClick={showModal}><SportsEsportsIcon key="play" fontSize="large"/> Play Game</button>]} cover={<img alt="example" src={props.thumbnail} style={{ objectFit: 'cover', height: '350px' }}/>}>
                 <Skeleton loading={props.loading} active>
                     <Meta title={props.title}/>
                     <div className="row my-2">
@@ -40,9 +33,6 @@ const MyCard = (props) => {
                     </div>
                 </Skeleton>
             </Card>
-            <Modal mask={true} bodyStyle={{height:'100%', width:'100%', display: "inline-block"}} title={props.title} open={isModalOpen} onCancel={handleCancel} footer={null} centered={true}>
-                <iframe width={'450'} height={'800'} src={props.url} title={props.description} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </Modal>
         </>
     );
 };
